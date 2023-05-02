@@ -9,12 +9,12 @@ const Created = (res, data) => {
 }
 
 const BadRequest = (res, err) => {
-    console.error(err)
+    // console.error(err)
     res.status(400).send({error: err.message})
 }
 
 const Unauthorized = (res, err) => {
-    console.error(err)
+    // console.error(err)
     res.status(401).send({error: "Please authenticate"})
 }
 

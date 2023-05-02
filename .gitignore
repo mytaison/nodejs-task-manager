@@ -1,2 +1,4 @@
 node_modules/
 config/dev.env
+config/test.env
+package-lock.json

@@ -1,8 +1,14 @@
 const mongoose = require('mongoose')
 
 const db_name = 'task-manager-api'
-const db_url = `${process.env.MONGODB_URL_PRE}${encodeURIComponent(process.env.MONGODB_USER)}:${encodeURIComponent(process.env.MONGODB_PASS)}${process.env.MONGODB_URL_POST}`
-// const db_url = `${process.env.MONGODB_URL}${db_name}`
+var db_url = ""
+if( process.env.MONGODB_USER === "" || process.env.MONGODB_PASS === "" ){
+  // const db_url = `${process.env.MONGODB_URL}${db_name}`
+  db_url = `${process.env.MONGODB_URL_PRE}${process.env.MONGODB_URL_POST}`
+
+}else{
+  db_url = `${process.env.MONGODB_URL_PRE}${encodeURIComponent(process.env.MONGODB_USER)}:${encodeURIComponent(process.env.MONGODB_PASS)}${process.env.MONGODB_URL_POST}`
+}
 const options = {
     autoIndex: true, // build indexes (by default true)
     maxPoolSize: 10, // Maintain up to 10 socket connections
@@ -14,7 +20,7 @@ const options = {
 async function connect(){
     await mongoose.connect(db_url, options)
     // console.log(db_url)
-    console.log("Mongoose Connected.")
+    // console.log("Mongoose Connected.")
 }
 
 connect().catch(error => console.error(error))
